@@ -27,7 +27,8 @@ let cfip = [
     'stock.adobe.com#美國-US-官方',
     'usa.cloudflare.skk.moe#美國-US-優選',
     'visa.com#美國-US-官方02',
-    'download.visualstudio.microsoft.com#全球加速-MS'
+    'speed.cloudflare.com#全球優選-CF官方',
+    'icook.tw#全球優選-愛料理'
 ];
 
 function closeSocketQuietly(socket) { 
