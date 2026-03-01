@@ -30,7 +30,6 @@ let cfip = [
     'speed.cloudflare.com#全球優選-CF官方',
     'icook.tw#全球優選-愛料理'
 ];
-
 function closeSocketQuietly(socket) { 
     try { 
         if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CLOSING) {
