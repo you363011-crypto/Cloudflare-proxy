@@ -13,6 +13,13 @@ let yourUUID = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63'; // 專屬 UUID
 let disabletro = false;   // 預設開啟 Trojan
 
 // --- 優化後的國家/地區優選 IP 池 ---
+let subPath = 'link';     
+let password = '546800';  
+let proxyIP = 'proxy.xxxxxxxx.tk:50001';  // 鎖定固定出口 IP
+let yourUUID = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63'; 
+let disabletro = false;   
+
+// --- 優化後的 2026 全網保活國家優選池 ---
 let cfip = [
     'cf.008500.xyz#香港-HK',
     'hk.cf.130519.xyz#香港-HK-02',
@@ -27,6 +34,7 @@ let cfip = [
     'stock.adobe.com#美國-US-官方',
     'usa.cloudflare.skk.moe#美國-US-優選',
     'visa.com#美國-US-官方02',
+    'download.visualstudio.microsoft.com#全球加速'
 ];
 function closeSocketQuietly(socket) { 
     try { 
