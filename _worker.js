@@ -6,17 +6,29 @@
 
 import { connect } from 'cloudflare:sockets';
 
-let subPath = 'link';     // 节点订阅路径,不修改将使用uuid作为订阅路径
-let password = '546800';  // 主页密码,建议修改或添加 PASSWORD环境变量
-let proxyIP = 'proxy.xxxxxxxx.tk:50001';  // proxyIP 格式：ip、域名、ip:port、域名:port等,没填写port，默认使用443
-let yourUUID = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63'; // UUID,建议修改或添加环境便量
-let disabletro = false;  // 是否关闭trojan, 设置为true时关闭，false开启 
+let subPath = 'link';     // 節點訂閱路徑
+let password = '546800';  // 主頁登錄密碼
+let proxyIP = 'proxy.xxxxxxxx.tk:50001';  // 你的固定落地 IP
+let yourUUID = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63'; // 專屬 UUID
+let disabletro = false;   // 預設開啟 Trojan
 
-// CDN 
-let cfip = [ // 格式:优选域名:端口#备注名称、优选IP:端口#备注名称、[ipv6优选]:端口#备注名称、优选域名#备注 
-    'mfa.gov.ua#SG', 'saas.sin.fan#HK', 'store.ubi.com#JP','cf.130519.xyz#KR','cf.008500.xyz#HK', 
-    'cf.090227.xyz#SG', 'cf.877774.xyz#HK','cdns.doon.eu.org#JP','sub.danfeng.eu.org#TW','cf.zhetengsha.eu.org#HK'
-];  // 在此感谢各位大佬维护的优选域名
+// --- 優化後的國家/地區優選 IP 池 ---
+let cfip = [
+    'cf.008500.xyz#香港-HK',
+    'hk.cf.130519.xyz#香港-HK-02',
+    'sub.danfeng.eu.org#台灣-TW',
+    'tw.cfip.xyz#台灣-TW-02',
+    'store.ubi.com#日本-JP',
+    'jp.cloudflare.skk.moe#日本-JP-02',
+    'cf.130519.xyz#韓國-KR',
+    'kr.cfip.xyz#韓國-KR-02',
+    'mfa.gov.ua#新加坡-SG',
+    'cf.090227.xyz#新加坡-SG-02',
+    'stock.adobe.com#美國-US-官方',
+    'usa.cloudflare.skk.moe#美國-US-優選',
+    'visa.com#美國-US-官方02',
+    'download.visualstudio.microsoft.com#全球加速-MS'
+];
 
 function closeSocketQuietly(socket) { 
     try { 
@@ -208,10 +220,11 @@ export default {
     async fetch(request, env, ctx) {
         try {
 
-			if (subPath === 'link' || subPath === '') {
-				subPath = yourUUID;
-			}
+if (subPath === 'link' || subPath === '') {
+                subPath = yourUUID;
+            }
 
+            // 核心鎖定：優先讀取環境變量中的 PROXYIP
             if (env.PROXYIP || env.proxyip || env.proxyIP) {
                 const servers = (env.PROXYIP || env.proxyip || env.proxyIP).split(',').map(s => s.trim());
                 proxyIP = servers[0]; 
